@@ -4,14 +4,15 @@
 #
 Name     : perl-Term-Shell
 Version  : 0.11
-Release  : 12
+Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/Term-Shell-0.11.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/Term-Shell-0.11.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libt/libterm-shell-perl/libterm-shell-perl_0.09-1.debian.tar.xz
-Summary  : A simple command-line shell framework for Perl
+Summary  : 'A simple command-line shell framework.'
 Group    : Development/Tools
 License  : Artistic-1.0-Perl GPL-2.0
 Requires: perl-Term-Shell-license = %{version}-%{release}
+Requires: perl-Term-Shell-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(Term::ReadKey)
 BuildRequires : perl(Text::Autoformat)
@@ -39,18 +40,28 @@ Group: Default
 license components for the perl-Term-Shell package.
 
 
+%package perl
+Summary: perl components for the perl-Term-Shell package.
+Group: Default
+Requires: perl-Term-Shell = %{version}-%{release}
+
+%description perl
+perl components for the perl-Term-Shell package.
+
+
 %prep
 %setup -q -n Term-Shell-0.11
-cd ..
-%setup -q -T -D -n Term-Shell-0.11 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/libterm-shell-perl_0.09-1.debian.tar.xz
+cd %{_builddir}/Term-Shell-0.11
 mkdir -p deblicense/
-cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Term-Shell-0.11/deblicense/
+cp -r %{_builddir}/debian/* %{_builddir}/Term-Shell-0.11/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -62,7 +73,7 @@ fi
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Term-Shell
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-Term-Shell/LICENSE
+cp %{_builddir}/Term-Shell-0.11/LICENSE %{buildroot}/usr/share/package-licenses/perl-Term-Shell/38e94f89ec602e1a6495ef7c30477d01aeefedc9
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -75,7 +86,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Term/Shell.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -83,4 +93,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-Term-Shell/LICENSE
+/usr/share/package-licenses/perl-Term-Shell/38e94f89ec602e1a6495ef7c30477d01aeefedc9
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Term/Shell.pm
