@@ -4,7 +4,7 @@
 #
 Name     : perl-Term-Shell
 Version  : 0.13
-Release  : 19
+Release  : 20
 URL      : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/Term-Shell-0.13.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/Term-Shell-0.13.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libt/libterm-shell-perl/libterm-shell-perl_0.09-1.debian.tar.xz
@@ -97,4 +97,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.34.0/Term/Shell.pm
+/usr/lib/perl5/*
