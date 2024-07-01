@@ -4,7 +4,7 @@
 #
 Name     : perl-Term-Shell
 Version  : 0.13
-Release  : 23
+Release  : 24
 URL      : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/Term-Shell-0.13.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/Term-Shell-0.13.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libt/libterm-shell-perl/libterm-shell-perl_0.09-1.debian.tar.xz
